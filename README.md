@@ -277,12 +277,28 @@ Daglite aims to be lightweight, inspectable, and production-friendly. It priorit
 
 # 🛣 Future Improvements
 
-* Distributed execution & Postgres backend
-* `POST /api/runs` HTTP endpoint to trigger runs programmatically
+### Packaging
+* Proper `pip install daglite` support — `aiohttp` and `croniter` as declared dependencies in `pyproject.toml` so nothing needs to be installed manually
+
+### Triggering
+* `POST /api/runs` HTTP endpoint — so any external service can trigger a flow programmatically with params (e.g. `{"video_id": "abc123"}`)
+* `params` properly passed through to task functions — currently saved in DB but tasks can't access them
+
+### Observability & UI
+* Better error visibility in the UI — which task failed, what the error was, how many retries happened, all visible at a glance
+* Real-time log streaming (currently only tail)
+* Search and filter on runs list
+* Artifact preview in UI
+
+### Execution
+* Multiple workers actually running fan-out tasks in parallel (currently `daglite run` is single-worker sequential)
+* Distributed execution with Postgres backend for multi-machine setups
 * Queue-based scheduling
+
+### Other
 * Richer DAG editor
 * Artifact versioning
-* Kubernetes integration
+* Cron schedule management via UI
 
 ---
 
